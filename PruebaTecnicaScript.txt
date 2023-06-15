@@ -1,0 +1,41 @@
+create DATABASE Cristian20230615
+
+create table tresource_type(
+idResourceType int AUTO_INCREMENT PRIMARY KEY,
+created datetime,
+descrip varchar(200) not null
+);
+
+CREATE TABLE tresource(
+idResource int AUTO_INCREMENT primary KEY,
+created datetime DEFAULT now(),
+descrip varchar(200),
+idResourceType int,
+CONSTRAINT FK_tsourseType FOREIGN KEY (idResourceType)
+REFERENCES tresource_type(idResourceType)
+);
+
+
+insert into tresource_type(descrip,created)
+values ('Video',NOW()),
+('PDF Documentación',NOW()),
+('PDF Enunciado',NOW()),
+('PDF Solución',NOW())
+
+INSERT INTO tresource(created,descrip,idResourceType)
+VALUES(NOW(),'ENUNCIADO',3),
+(NOW(),'MANUAL',2),
+(NOW(),'SOLUCIONES',4),
+(NOW(),'Multimedia',1),
+(NOW(),'Ejercicios',3),
+(NOW(),'SOFTWARE',2),
+
+select RT.descrip,COUNT(R.idResourceType) from tresource_type RT INNER JOIN tresource R
+on RT.idResourceType = R.idResourceType
+GROUP BY RT.descrip
+
+
+
+
+
+
